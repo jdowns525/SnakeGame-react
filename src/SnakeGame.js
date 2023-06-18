@@ -44,3 +44,46 @@ const SnakeGame = () => {
       }
     }, 200);
 
+    return () => clearInterval(moveSnake);
+  }, [snake, food, direction]);
+
+  const handleKeyDown = e => {
+    if (e.keyCode === 37 && direction !== 'right')
+      setDirection('left');
+    else if (e.keyCode === 38 && direction !== 'down')
+      setDirection('up');
+    else if (e.keyCode === 39 && direction !== 'left')
+      setDirection('right');
+    else if (e.keyCode === 40 && direction !== 'up')
+      setDirection('down');
+  };
+
+  return (
+    <div
+      style={{ width: '400px', height: '400px', border: '1px solid black' }}
+      tabIndex="0"
+      onKeyDown={handleKeyDown}
+    >
+      {Array.from({ length: 20 }).map((_, row) => (
+        <div key={row} style={{ display: 'flex' }}>
+          {Array.from({ length: 20 }).map((_, col) => {
+            const isSnake = snake.some(segment => segment.x === col && segment.y === row);
+            const isFood = food.x === col && food.y === row;
+            return (
+              <div
+                key={`${col}-${row}`}
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  backgroundColor: isSnake ? 'green' : isFood ? 'red' : 'white'
+                }}
+              />
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default SnakeGame;
