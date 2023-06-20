@@ -60,7 +60,7 @@ const SnakeGame = () => {
 
   return (
     <div
-      style={{ width: '400px', height: '400px', border: '1px solid black' }}
+      style={{ width: '500px', height: '400px', border: '1px solid black' }}
       tabIndex="0"
       onKeyDown={handleKeyDown}
     >
